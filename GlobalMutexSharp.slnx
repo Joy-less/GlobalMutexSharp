@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GlobalMutexSharp/GlobalMutexSharp.csproj" />
+  <Project Path="GlobalMutexSharp.Tests/GlobalMutexSharp.Tests.csproj" />
+</Solution>
