@@ -107,13 +107,22 @@ public sealed class GlobalMutex : IDisposable {
         }
     }
 
+    /// <summary>
+    /// An object that exits a global mutex when disposed.
+    /// </summary>
     public readonly struct DisposeExiter : IDisposable {
+        /// <summary>
+        /// The global mutex to exit when disposed.
+        /// </summary>
         public GlobalMutex Mutex { get; }
 
         internal DisposeExiter(GlobalMutex Mutex) {
             this.Mutex = Mutex;
         }
 
+        /// <summary>
+        /// Exits the global mutex.
+        /// </summary>
         public void Dispose() {
             Mutex.TryExit();
         }

@@ -5,6 +5,27 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <!-- IDE0290: Use primary constructor -->
-    <NoWarn>IDE0290</NoWarn>
+    <!-- CS1573: Parameter 'parameter' has no matching param tag in the XML comment for 'parameter' (but other parameters do) -->
+    <NoWarn>IDE0290; CS1573</NoWarn>
+
+    <IsAotCompatible>True</IsAotCompatible>
+    <IsTrimmable>True</IsTrimmable>
+
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Joyless</Authors>
+    <Description>An easy-to-use cross-process lock in C#.</Description>
+    <PackageProjectUrl>https://github.com/Joy-less/GlobalMutexSharp</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Joy-less/GlobalMutexSharp</RepositoryUrl>
+    <PackageTags>mutex; named mutex; lock; threading</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 </Project>
