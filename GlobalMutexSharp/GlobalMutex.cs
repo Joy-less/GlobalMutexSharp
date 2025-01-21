@@ -1,5 +1,10 @@
 ﻿namespace GlobalMutexSharp;
 
+// Compatibility
+#if !NET9_0_OR_GREATER
+using Lock = object;
+#endif
+
 /// <summary>
 /// A re-entrant named mutex that can lock across processes.
 /// </summary>

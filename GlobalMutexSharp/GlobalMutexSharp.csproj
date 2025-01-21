@@ -2,16 +2,13 @@
   <PropertyGroup>
     <VersionPrefix>1.0</VersionPrefix>
 
-    <TargetFrameworks>net9.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <!-- IDE0290: Use primary constructor -->
     <!-- CS1573: Parameter 'parameter' has no matching param tag in the XML comment for 'parameter' (but other parameters do) -->
     <NoWarn>IDE0290; CS1573</NoWarn>
-
-    <IsAotCompatible>True</IsAotCompatible>
-    <IsTrimmable>True</IsTrimmable>
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -22,6 +19,11 @@
     <RepositoryUrl>https://github.com/Joy-less/GlobalMutexSharp</RepositoryUrl>
     <PackageTags>mutex; named mutex; lock; threading</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
+	<IsAotCompatible>True</IsAotCompatible>
+	<IsTrimmable>True</IsTrimmable>
   </PropertyGroup>
 
   <ItemGroup>
