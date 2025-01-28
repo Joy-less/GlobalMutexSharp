@@ -72,7 +72,7 @@ public sealed class GlobalMutex : IDisposable {
 
     private bool TryEnter(TimeSpan Timeout) {
         lock (Lock) {
-            // Re-enter mutex if already acquired
+            // Re-enter mutex once if already acquired
             if (Depth > 0) {
                 Depth++;
                 return true;
@@ -80,16 +80,15 @@ public sealed class GlobalMutex : IDisposable {
 
             try {
                 // Try to acquire mutex
-                if (Mutex.WaitOne(Timeout, exitContext: false)) {
-                    Depth++;
-                    return true;
-                }
-                else {
+                if (!Mutex.WaitOne(Timeout, exitContext: false)) {
                     return false;
                 }
+                // Enter mutex once
+                Depth++;
+                return true;
             }
             catch (AbandonedMutexException) {
-                // The mutex was abandoned in another process, but it still gets acquired
+                // The mutex was abandoned in another process (but it still gets acquired)
                 return true;
             }
         }
@@ -101,7 +100,7 @@ public sealed class GlobalMutex : IDisposable {
                 return false;
             }
 
-            // Exit mutex
+            // Exit mutex once
             Depth--;
 
             // Release mutex if fully exited
