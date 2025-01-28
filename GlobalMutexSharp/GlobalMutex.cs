@@ -45,10 +45,10 @@ public sealed class GlobalMutex : IDisposable {
     /// </returns>
     /// <exception cref="TimeoutException"/>
     public DisposeExiter Acquire(TimeSpan Timeout) {
-        if (!TryEnter(Timeout)) {
+        if (!TryAcquire(Timeout, out DisposeExiter Exiter)) {
             throw new TimeoutException("Timeout acquiring global mutex.");
         }
-        return new DisposeExiter(this);
+        return Exiter;
     }
     /// <inheritdoc cref="Acquire(TimeSpan)"/>
     public Task<DisposeExiter> AcquireAsync(TimeSpan Timeout) {
