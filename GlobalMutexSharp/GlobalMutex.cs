@@ -34,8 +34,10 @@ public sealed class GlobalMutex : IDisposable {
     /// Releases the mutex and frees all resources used.
     /// </summary>
     public void Dispose() {
-        Depth = 0;
-        Mutex.Dispose();
+        lock (Lock) {
+            Depth = 0;
+            Mutex.Dispose();
+        }
     }
     /// <summary>
     /// Enters the mutex, blocking up to the given <paramref name="Timeout"/> until it is acquired.
